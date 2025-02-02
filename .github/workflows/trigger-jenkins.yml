@@ -28,10 +28,7 @@ jobs:
         run: |
           JENKINS_USER="${{ secrets.JENKINS_USER }}"
           JENKINS_API_TOKEN="${{ secrets.JENKINS_API_TOKEN }}"
-          S3_BUCKET="${{ github.event.inputs.S3_BUCKET }}"
-          SE_PATH="${{ github.event.inputs.FILE_PATH }}"
-          
-          FULL_BUILD_URL="${{ secrets.BUILD_URL }}S3_BUCKET=$S3_BUCKET&S3_PATH=$S3_PATH"
+          FULL_BUILD_URL="${{ secrets.BUILD_URL }}"
 
           echo "🚀 Jenkins Build URL: $FULL_BUILD_URL"
 
