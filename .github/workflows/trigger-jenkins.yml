@@ -22,11 +22,9 @@ jobs:
           JENKINS_USER="${{ secrets.JENKINS_USER }}"
           JENKINS_API_TOKEN="${{ secrets.JENKINS_API_TOKEN }}"
           JENKINS_JOB_NAME="${{ secrets.JENKINS_JOB_NAME }}"
-          BRANCH="${{ github.event.inputs.BRANCH }}"
-          DEPLOY_ENV="${{ github.event.inputs.DEPLOY_ENV }}"
+          S3_BUCKET="yotpo-people"
+          SE_PATH="${{ github.event.inputs.FILE_PATH }}"
           
-          # Construct Jenkins API URL with query parameters
           BUILD_URL="$JENKINS_URL/job/$JENKINS_JOB_NAME/buildWithParameters?BRANCH=$BRANCH&DEPLOY_ENV=$DEPLOY_ENV"
 
-          # Trigger the Jenkins job using curl
           curl -X POST "$BUILD_URL" --user "$JENKINS_USER:$JENKINS_API_TOKEN"
