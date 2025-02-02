@@ -11,6 +11,14 @@ on:
         description: 'Deployment Environment'
         required: true
         default: 'staging'
+      S3_BUCKET:
+        description: 'S3 bucket'
+        required: true
+        default: 'yotpo-people'
+      S3_PATH:
+        description: 'S3 filepath'
+        required: true
+        default: ''
 
 jobs:
   trigger-jenkins:
@@ -22,9 +30,9 @@ jobs:
           JENKINS_USER="${{ secrets.JENKINS_USER }}"
           JENKINS_API_TOKEN="${{ secrets.JENKINS_API_TOKEN }}"
           JENKINS_JOB_NAME="${{ secrets.JENKINS_JOB_NAME }}"
-          S3_BUCKET="yotpo-people"
+          S3_BUCKET="${{ github.event.inputs.S3_BUCKET }}"
           SE_PATH="${{ github.event.inputs.FILE_PATH }}"
           
-          BUILD_URL="$JENKINS_URL/job/$JENKINS_JOB_NAME/buildWithParameters?BRANCH=$BRANCH&DEPLOY_ENV=$DEPLOY_ENV"
+          BUILD_URL="$JENKINS_URL/job/$JENKINS_JOB_NAME/buildWithParameters?S3_BUCKET=$S3_BUCKET&S3_PATH=$S3_PATH"
 
           curl -X POST "$BUILD_URL" --user "$JENKINS_USER:$JENKINS_API_TOKEN"
