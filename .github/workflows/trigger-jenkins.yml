@@ -1,37 +1,22 @@
 name: Trigger Jenkins Build with Parameters
 
 on:
-  workflow_dispatch:  # Allows manual trigger from GitHub UI with inputs
-    inputs:
-      BRANCH:
-        description: 'Git Branch to Build'
-        required: true
-        default: 'main'
-      DEPLOY_ENV:
-        description: 'Deployment Environment'
-        required: true
-        default: 'staging'
-      S3_BUCKET:
-        description: 'S3 bucket'
-        required: true
-        default: 'yotpo-people'
-      S3_PATH:
-        description: 'S3 filepath'
-        required: true
-        default: 'justin_farris/multicurrency2025-02-02T21-54-02.csv'
+  push:
+    branches:
+      - main
 
 jobs:
   trigger-jenkins:
     runs-on: ubuntu-latest
     steps:
-      - name: Construct Jenkins Build URL
+      - name: Set Jenkins URL
         run: |
-          JENKINS_USER="${{ secrets.JENKINS_USER }}"
-          JENKINS_API_TOKEN="${{ secrets.JENKINS_API_TOKEN }}"
-          FULL_BUILD_URL="${{ secrets.BUILD_URL }}"
+          export FULL_BUILD_URL="https://jenkins.example.com/job/your-job-name/buildWithParameters?token=your-token"
+          echo "FULL_BUILD_URL=$FULL_BUILD_URL" >> $GITHUB_ENV
 
-          echo "🚀 Jenkins Build URL: $FULL_BUILD_URL"
-
-      - name: Trigger Jenkins Build
+      - name: Trigger Jenkins build
         run: |
           curl -X POST "$FULL_BUILD_URL"
+        env:
+          JENKINS_USER: ${{ secrets.JENKINS_USER }}
+          JENKINS_API_TOKEN: ${{ secrets.JENKINS_API_TOKEN }}
