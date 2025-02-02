@@ -33,7 +33,7 @@ jobs:
           S3_BUCKET="${{ github.event.inputs.S3_BUCKET }}"
           SE_PATH="${{ github.event.inputs.FILE_PATH }}"
           
-          BUILD_URL="$JENKINS_URL/job/$JENKINS_JOB_NAME/buildWithParameters?S3_BUCKET=$S3_BUCKET&S3_PATH=$S3_PATH"
+          BUILD_URL="$JENKINS_URL/job/$JENKINS_JOB_NAME/buildWithParameters?S3_BUCKET=$S3_BUCKET&S3_PATH=justin_farris/multicurrency2025-02-02T21-54-02.csv"
 
           echo "🚀 Jenkins Build URL: $BUILD_URL"
 
