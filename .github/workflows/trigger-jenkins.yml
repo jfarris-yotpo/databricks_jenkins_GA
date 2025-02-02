@@ -37,4 +37,4 @@ jobs:
 
       - name: Trigger Jenkins Build
         run: |
-          curl -X POST "$FULL_BUILD_URL" --user "$JENKINS_USER:$JENKINS_API_TOKEN"
+          curl -X POST "$FULL_BUILD_URL"
