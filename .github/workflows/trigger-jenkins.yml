@@ -24,7 +24,7 @@ jobs:
   trigger-jenkins:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Jenkins Build with Parameters
+      - name: Construct Jenkins Build URL
         run: |
           JENKINS_URL="${{ secrets.JENKINS_URL }}"
           JENKINS_USER="${{ secrets.JENKINS_USER }}"
@@ -35,4 +35,8 @@ jobs:
           
           BUILD_URL="$JENKINS_URL/job/$JENKINS_JOB_NAME/buildWithParameters?S3_BUCKET=$S3_BUCKET&S3_PATH=$S3_PATH"
 
+          echo "🚀 Jenkins Build URL: $BUILD_URL"
+
+      - name: Trigger Jenkins Build
+        run: |
           curl -X POST "$BUILD_URL" --user "$JENKINS_USER:$JENKINS_API_TOKEN"
