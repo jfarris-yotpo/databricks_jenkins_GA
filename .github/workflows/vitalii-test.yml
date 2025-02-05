@@ -1,0 +1,54 @@
+name: Example workflow
+
+on:
+  workflow_dispatch:  # Allows manual trigger from GitHub UI with inputs
+    inputs:
+        JENKINS_API_USER:
+          description: 'Jenkins API user'
+          required: true
+        JENKINS_API_TOKEN:
+          description: 'Jenkins API token'
+          required: true
+        JOB_NAME:
+          description: 'Jenkins job name'
+          required: true
+        DEPLOY_DEFAULT_SERVICES:
+          description: 'Deploy default services'
+          required: false
+          default: 'true'
+        DEPLOYMENT_FILES:
+          description: 'Deployment values files'
+          required: false
+          default: ''
+        DEPLOYMENT_TAG:
+          description: 'Git tag to deploy (default: git commit SHA)'
+          required: false
+          default: ''
+        FULL_OUTPUT:
+          description: 'If output full cURL output(useful for debugging)'
+          required: false
+          default: 'false'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy default services
+        uses: YotpoLtd/ci-utils/.github/actions/trigger-k8s-deploy@trigger-k8s-deploy.v0
+        with:
+          JENKINS_API_USER: ${{ secrets.JENKINS_API_USER }}
+          JENKINS_API_TOKEN: ${{ secrets.JENKINS_API_TOKEN }}
+          JOB_NAME: production_deploy_something_to_k8s
+          # Required
+          DEPLOY_DEFAULT_SERVICES: 'true'
+
+      - name: Deploy Rollout
+        uses: YotpoLtd/ci-utils/.github/actions/trigger-k8s-deploy@trigger-k8s-deploy.v0
+        with:
+          JENKINS_API_USER: ${{ secrets.JENKINS_API_USER }}
+          JENKINS_API_TOKEN: ${{ secrets.JENKINS_API_TOKEN }}
+          JOB_NAME: production_deploy_something_to_k8s
+          # Required
+          DEPLOYMENT_FILES: deployments/services/my-service-api.yaml
+
