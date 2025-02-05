@@ -37,7 +37,7 @@ jobs:
       - name: Deploy default services
         uses: YotpoLtd/ci-utils/.github/actions/trigger-k8s-deploy@trigger-k8s-deploy.v0
         with:
-          JENKINS_API_USER: ${{ secrets.JENKINS_API_USER }}
+          JENKINS_API_USER: ${{ secrets.JENKINS_USER }}
           JENKINS_API_TOKEN: ${{ secrets.JENKINS_API_TOKEN }}
           JOB_NAME: production_deploy_something_to_k8s
           # Required
@@ -46,7 +46,7 @@ jobs:
       - name: Deploy Rollout
         uses: YotpoLtd/ci-utils/.github/actions/trigger-k8s-deploy@trigger-k8s-deploy.v0
         with:
-          JENKINS_API_USER: ${{ secrets.JENKINS_API_USER }}
+          JENKINS_API_USER: ${{ secrets.JENKINS_USER }}
           JENKINS_API_TOKEN: ${{ secrets.JENKINS_API_TOKEN }}
           JOB_NAME: production_deploy_something_to_k8s
           # Required
