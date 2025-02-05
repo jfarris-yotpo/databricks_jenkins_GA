@@ -3,31 +3,31 @@ name: Example workflow
 on:
   workflow_dispatch:  # Allows manual trigger from GitHub UI with inputs
     inputs:
-        JENKINS_API_USER:
-          description: 'Jenkins API user'
-          required: true
-        JENKINS_API_TOKEN:
-          description: 'Jenkins API token'
-          required: true
+        # JENKINS_API_USER:
+        #   description: 'Jenkins API user'
+        #   required: true
+        # JENKINS_API_TOKEN:
+        #   description: 'Jenkins API token'
+        #   required: true
         JOB_NAME:
           description: 'Jenkins job name'
           required: true
-        DEPLOY_DEFAULT_SERVICES:
-          description: 'Deploy default services'
-          required: false
-          default: 'true'
-        DEPLOYMENT_FILES:
-          description: 'Deployment values files'
-          required: false
-          default: ''
-        DEPLOYMENT_TAG:
-          description: 'Git tag to deploy (default: git commit SHA)'
-          required: false
-          default: ''
-        FULL_OUTPUT:
-          description: 'If output full cURL output(useful for debugging)'
-          required: false
-          default: 'false'
+        # DEPLOY_DEFAULT_SERVICES:
+        #   description: 'Deploy default services'
+        #   required: false
+        #   default: 'true'
+        # DEPLOYMENT_FILES:
+        #   description: 'Deployment values files'
+        #   required: false
+        #   default: ''
+        # DEPLOYMENT_TAG:
+        #   description: 'Git tag to deploy (default: git commit SHA)'
+        #   required: false
+        #   default: ''
+        # FULL_OUTPUT:
+        #   description: 'If output full cURL output(useful for debugging)'
+        #   required: false
+        #   default: 'false'
 
 jobs:
   build:
